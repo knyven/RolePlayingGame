@@ -3,5 +3,7 @@ public interface Player {
     int getAttackStrength();
     int getDefenceStrength();
 
+    void addArmor(Armor armor);
+
 
 }

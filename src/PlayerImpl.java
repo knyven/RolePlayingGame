@@ -53,5 +53,16 @@ public class PlayerImpl implements Player{
         return this.defenceStrength;
     }
 
+    @Override
+    public void addArmor(Armor armor) {
+        if (armor.getArmorType() == gearType.headGear) {
+            this.headArmor = armor;
+        } else if (armor.getArmorType() == gearType.handGear) {
+            this.handArmor.add(armor);
+        } else if (armor.getArmorType() == gearType.footGear) {
+            this.footArmor.add(armor);
+        }
+    }
+
 
 }

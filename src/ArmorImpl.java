@@ -10,32 +10,32 @@ public abstract class ArmorImpl implements Armor{
 
     @Override
     public String getArmorName() {
-        return null;
+        return this.armorName;
     }
 
     @Override
     public String getArmorAdj() {
-        return null;
+        return this.armorAdj;
     }
 
     @Override
     public String getArmorComboName() {
-        return null;
+        return this.armorComboName;
     }
 
     @Override
     public int getAttackStrength() {
-        return 0;
+        return this.attackStrength;
     }
 
     @Override
     public int getDefenceStrength() {
-        return 0;
+        return this.defenceStrength;
     }
 
     @Override
     public gearType getArmorType() {
-        return null;
+        return this.armorType;
     }
 
     @Override
