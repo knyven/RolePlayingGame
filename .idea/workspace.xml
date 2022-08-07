@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="3rd upload">
-      <change afterPath="$PROJECT_DIR$/src/Fight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FightImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fight.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +17,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -91,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659900633989</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="3rd upload">
+      <created>1659900779222</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659900779222</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
