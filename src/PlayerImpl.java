@@ -12,10 +12,10 @@ public class PlayerImpl implements Player{
 
 
     // initialize player to have a name and no gear and no attack or defence strength
-    public PlayerImpl(String name) {
+    public PlayerImpl(String name, int attackStrength, int defenceStrength) {
         this.name = name;
-        this.attackStrength = 0;
-        this.defenceStrength = 0;
+        this.attackStrength = attackStrength;
+        this.defenceStrength = defenceStrength;
         this.headArmor = null;
         this.handArmor = new ArrayList<>();
         this.footArmor = new ArrayList<>();
