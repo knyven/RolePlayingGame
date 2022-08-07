@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="1st upload">
-      <change afterPath="$PROJECT_DIR$/src/FootArmor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HandArmor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HeadArmor.java" afterDir="false" />
+    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="2nd upload">
+      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PlayerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArmorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -79,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659898392847</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="2nd upload">
+      <created>1659899020429</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659899020429</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,6 +101,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1st upload" />
-    <option name="LAST_COMMIT_MESSAGE" value="1st upload" />
+    <MESSAGE value="2nd upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="2nd upload" />
   </component>
 </project>
