@@ -1,5 +1,10 @@
 public abstract class ArmorImpl implements Armor{
-
+    protected String armorName;
+    protected String armorAdj;
+    protected String armorComboName;
+    protected int attackStrength;
+    protected int defenceStrength;
+    protected gearType armorType;
 
 
 
