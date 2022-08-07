@@ -67,13 +67,14 @@ public class PlayerImpl implements Player{
         {
             throw new IllegalArgumentException("Armor cannot be null");
         }
-        // if armor is head gear check is player has head gear
+        // if armor is headgear check is player has headgear
         if (armor.getArmorType() == gearType.headGear)
         {
-            // if player has headgear raise exception
+            // if player has headgear combine the pieces
             if(hasHeadArmor())
             {
-                this.headArmor = this.headArmor.combineArmor(armor);
+                Armor newHeadArmor = this.headArmor.combineArmor(armor);
+                this.headArmor = newHeadArmor;
             }
             else
             {
@@ -84,17 +85,25 @@ public class PlayerImpl implements Player{
         {
             if(isHandFull())
             {
-                //this.handArmor = this.handArmor.get(0).combineArmor(armor);
+                Armor newHandArmor = this.handArmor.get(1).combineArmor(armor);
+                this.handArmor.set(1, newHandArmor);
             }
             else
             {
-               // add armor to hand
+               this.handArmor.add(armor);
             }
-            this.handArmor.add(armor);
         }
         else if (armor.getArmorType() == gearType.footGear)
         {
-           // add armor to foot armor
+           if(isFootFull())
+           {
+               Armor newFootArmor = this.footArmor.get(1).combineArmor(armor);
+               this.footArmor.set(1, newFootArmor);
+           }
+           else
+           {
+               this.footArmor.add(armor);
+           }
         }
     }
 
