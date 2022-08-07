@@ -8,4 +8,9 @@ public class HeadArmor extends ArmorImpl {
         this.defenceStrength = defenceStrength;
         this.armorType = armorType;
     }
+
+    @Override
+    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {
+        return new HeadArmor(newName, newAdj, newAttack, newDefence, armorType);
+    }
 }
