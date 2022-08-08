@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="fight">
-      <change afterPath="$PROJECT_DIR$/test/PlayerImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RolePlayingGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RolePlayingGame.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArmorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FootArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FootArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HandArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HandArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HeadArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HeadArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerImpl.java" afterDir="false" />
+    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="tests for player impl">
+      <change beforePath="$PROJECT_DIR$/test/PlayerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PlayerImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659926829208</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="tests for player impl">
+      <created>1659980608288</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1659980608289</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,6 +213,7 @@
     <MESSAGE value="2nd upload" />
     <MESSAGE value="3rd upload" />
     <MESSAGE value="fight" />
-    <option name="LAST_COMMIT_MESSAGE" value="fight" />
+    <MESSAGE value="tests for player impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests for player impl" />
   </component>
 </project>

@@ -60,8 +60,26 @@ public class PlayerImplTest {
 
         player1.addArmor(footArmor1);
         player1.addArmor(footArmor2);
-        System.out.println(player1.toString());
         player1.addArmor(footArmor3);
-        System.out.println(player1.toString());
+        assertEquals(
+        """ 
+        Player: Player1
+        Attack Strength: 40
+        Defence Strength: 40
+        No head armor present!
+        Foot Armor: Lightening Sneakers
+        Foot Armor: Happy, Scurrying Hoverboard
+        """ , player1.toString());
     }
+
+
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void combiningArmorException() {
+
+
+    }
+
+
+
+
 }
