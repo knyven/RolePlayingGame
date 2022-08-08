@@ -37,6 +37,19 @@ public class PlayerImplTest {
     }
 
     @org.junit.Test
+    public void getAttackStrengthException()
+    {
+        assertEquals(10, player1.getAttackStrength());
+        assertEquals(10, player2.getAttackStrength());
+    }
+
+    @org.junit.Test
+    public void getDefenceStrengthException() {
+        assertEquals(10, player1.getDefenceStrength());
+        assertEquals(10, player2.getDefenceStrength());
+    }
+
+    @org.junit.Test
     public void addArmor() {
         player1.addArmor(headArmor1);
         player1.addArmor(handArmor1);
