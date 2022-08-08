@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class FightImpl {
 
@@ -48,7 +47,7 @@ public class FightImpl {
         return;
     }
 
-    private Armor pickHeadGear() {
+    private Armor pickHeadArmor() {
         for (Armor head : armorList) {
             if (head.getArmorType() == gearType.headGear) {
                 return head;
@@ -57,7 +56,7 @@ public class FightImpl {
         return null;
     }
 
-    private Armor pickHandGear() {
+    private Armor pickHandArmor() {
         for (Armor hand : armorList) {
             if (hand.getArmorType() == gearType.handGear) {
                 return hand;
@@ -66,7 +65,7 @@ public class FightImpl {
         return null;
     }
 
-    private Armor pickFootGear() {
+    private Armor pickFootArmor() {
         for (Armor foot : armorList) {
             if (foot.getArmorType() == gearType.footGear) {
                 return foot;
@@ -75,7 +74,7 @@ public class FightImpl {
         return null;
     }
 
-    private Armor getHighestAttackGear() {
+    private Armor getHighestAttackArmor() {
         Armor highestAttackGear = armorList.get(0);
         for (Armor armors : armorList) {
             if (armors.getAttackStrength() == highestAttackGear.getAttackStrength()) {
@@ -87,7 +86,7 @@ public class FightImpl {
         return highestAttackGear;
     }
 
-    private Armor getHighestDefenseGear() {
+    private Armor getHighestDefenseArmor() {
         Armor highestDefenseGear = armorList.get(0);
         for (Armor armors : armorList) {
             if (armors.getDefenceStrength() == highestDefenseGear.getDefenceStrength()) {
@@ -99,7 +98,7 @@ public class FightImpl {
         return highestDefenseGear;
     }
 
-    private Armor getRandomGear() {
+    private Armor getRandomArmor() {
         int random = (int) Math.random() * armorTotal % armorTotal;
         while (random >= armorList.size()) {
             random = (int) Math.random() * armorTotal % armorTotal;
@@ -110,18 +109,18 @@ public class FightImpl {
     private void pickUpArmor() {
         PlayerImpl current = (PlayerImpl) (playerTurn ? player1 : player2);
         Armor newPiece;
-        if (!current.hasHeadArmor() && current.isHandFull() && current.isFootFull() && pickHeadGear() != null) {
-            newPiece = pickHeadGear();
-        } else if (current.hasHeadArmor() && !current.isHandFull() && current.isFootFull() && pickHandGear() != null) {
-            newPiece = pickHandGear();
-        } else if (current.hasHeadArmor() && current.isHandFull() && !current.isFootFull() && pickFootGear() != null) {
-            newPiece = pickFootGear();
-        } else if (getHighestAttackGear() != null) {
-            newPiece = getHighestAttackGear();
-        } else if (getHighestDefenseGear() != null) {
-            newPiece = getHighestDefenseGear();
+        if (!current.hasHeadArmor() && current.isHandFull() && current.isFootFull() && pickHeadArmor() != null) {
+            newPiece = pickHeadArmor();
+        } else if (current.hasHeadArmor() && !current.isHandFull() && current.isFootFull() && pickHandArmor() != null) {
+            newPiece = pickHandArmor();
+        } else if (current.hasHeadArmor() && current.isHandFull() && !current.isFootFull() && pickFootArmor() != null) {
+            newPiece = pickFootArmor();
+        } else if (getHighestAttackArmor() != null) {
+            newPiece = getHighestAttackArmor();
+        } else if (getHighestDefenseArmor() != null) {
+            newPiece = getHighestDefenseArmor();
         } else {
-            newPiece = getRandomGear();
+            newPiece = getRandomArmor();
         }
 
         current.addArmor(newPiece);
