@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="fight">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_8_2022_4_03_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_8_2022_4_03_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FightImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FightImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659980608289</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fight">
+      <created>1659997630542</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1659997630542</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,8 +218,8 @@
     <MESSAGE value="1st upload" />
     <MESSAGE value="2nd upload" />
     <MESSAGE value="3rd upload" />
-    <MESSAGE value="fight" />
     <MESSAGE value="tests for player impl" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests for player impl" />
+    <MESSAGE value="fight" />
+    <option name="LAST_COMMIT_MESSAGE" value="fight" />
   </component>
 </project>
