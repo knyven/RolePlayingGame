@@ -14,7 +14,7 @@ public class FightImpl {
     public FightImpl(Player player1, Player player2, ArrayList<Armor> armorList){
 
         if(player1.getArmorSize() != 0 || player2.getArmorSize() != 0 ){
-            throw new IllegalArgumentException("Combatants cannot have starting gears")
+            throw new IllegalArgumentException("Combatants cannot have starting gears");
         }
 
         if (armorList.size() != 10){
