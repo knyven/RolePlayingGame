@@ -6,4 +6,5 @@ public interface Player {
     void addArmor(Armor armor);
 
 
+    int getArmorSize();
 }
