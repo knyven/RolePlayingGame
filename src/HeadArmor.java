@@ -3,7 +3,7 @@ public class HeadArmor extends ArmorImpl {
     public HeadArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {
         this.armorName = armorName;
         this.armorAdj = armorAdj;
-        this.armorComboName = armorName + " " + armorAdj;
+        this.armorComboName = armorAdj + " " + armorName;
         this.attackStrength = attackStrength;
         this.defenceStrength = defenceStrength;
         this.armorType = armorType;

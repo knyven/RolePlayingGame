@@ -13,7 +13,7 @@ public class FootArmor extends ArmorImpl {
 
         this.armorName = armorName;
         this.armorAdj = armorAdj;
-        this.armorComboName = armorName + " " + armorAdj;
+        this.armorComboName = armorAdj + " " + armorName;
         this.attackStrength = attackStrength;
         this.defenceStrength = defenceStrength;
         this.armorType = armorType;

@@ -36,28 +36,33 @@ public class PlayerImpl implements Player{
 
     @Override
     public int getAttackStrength() {
-        this.attackStrength = this.attackStrength + this.headArmor.getAttackStrength();
+        int totalAttack = this.attackStrength;
+        if (this.headArmor != null) {
+            totalAttack += this.headArmor.getAttackStrength();
+        }
 
         for (Armor armor : this.handArmor) {
-            this.attackStrength += armor.getAttackStrength();
+            totalAttack += armor.getAttackStrength();
         }
         for (Armor armor : this.footArmor) {
-            this.attackStrength += armor.getAttackStrength();
+            totalAttack += armor.getAttackStrength();
         }
-        return this.attackStrength;
+        return totalAttack;
     }
 
     @Override
     public int getDefenceStrength() {
-        this.defenceStrength = this.defenceStrength + this.headArmor.getDefenceStrength();
-
+        int totalDefence = this.defenceStrength;
+        if (this.headArmor != null) {
+            totalDefence += this.headArmor.getAttackStrength();
+        }
         for (Armor armor : this.handArmor) {
-            this.defenceStrength += armor.getDefenceStrength();
+           totalDefence += armor.getDefenceStrength();
         }
         for (Armor armor : this.footArmor) {
-            this.defenceStrength += armor.getDefenceStrength();
+            totalDefence += armor.getDefenceStrength();
         }
-        return this.defenceStrength;
+        return totalDefence;
     }
 
     @Override
@@ -123,5 +128,33 @@ public class PlayerImpl implements Player{
         return headArmor == null? handArmor.size() + footArmor.size() : handArmor.size() + footArmor.size() + 1;
     }
 
+    @Override
+    public String toString() {
 
+
+        StringBuilder returnString = new StringBuilder();
+
+        returnString.append("Player: " + this.name + "\n");
+        returnString.append("Attack Strength: " + this.getAttackStrength() + "\n");
+        returnString.append("Defence Strength: " + this.getDefenceStrength() + "\n");
+        if(this.headArmor == null)
+        {
+            returnString.append("No head armor present!" + "\n");
+        }
+        else if(this.headArmor != null)
+        {
+            returnString.append("Head armor: " + this.headArmor.getArmorComboName() + "\n");
+        }
+
+
+        for(Armor armor : this.handArmor)
+        {
+            returnString.append("Hand Armor: " + armor.getArmorComboName() + "\n");
+        }
+        for(Armor armor : this.footArmor)
+        {
+            returnString.append("Foot Armor: " + armor.getArmorComboName() + "\n");
+        }
+        return returnString.toString();
+    }
 }

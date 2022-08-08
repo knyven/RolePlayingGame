@@ -22,8 +22,8 @@ public abstract class ArmorImpl implements Armor {
             throw new IllegalArgumentException("Armor cannot be of different type");
         }
 
-        String newName = this.armorName + " " + armor.getArmorName();
-        String newAdj = this.armorAdj + " " + armor.getArmorAdj();
+        String newName = this.armorName;
+        String newAdj = this.armorAdj + ", " + armor.getArmorAdj();
         int newAttack = this.attackStrength + armor.getAttackStrength();
         int newDefence = this.defenceStrength + armor.getDefenceStrength();
 
@@ -62,4 +62,15 @@ public abstract class ArmorImpl implements Armor {
         return this.armorType;
     }
 
+    @Override
+    public String toString() {
+        return "ArmorImpl{" +
+                "armorName='" + armorName + '\'' +
+                ", armorAdj='" + armorAdj + '\'' +
+                ", armorComboName='" + armorComboName + '\'' +
+                ", attackStrength=" + attackStrength +
+                ", defenceStrength=" + defenceStrength +
+                ", armorType=" + armorType +
+                '}';
+    }
 }
