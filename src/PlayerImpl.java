@@ -119,5 +119,9 @@ public class PlayerImpl implements Player{
         return this.footArmor.size() == 2;
     }
 
+    public int getArmorSize(){
+        return headArmor == null? handArmor.size() + footArmor.size() : handArmor.size() + footArmor.size() + 1;
+    }
+
 
 }
