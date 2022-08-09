@@ -1,3 +1,8 @@
+/**
+ * Abstract Class representing the armor pieces.
+ */
+
+
 abstract class ArmorImpl implements Armor {
     protected String armorName;
     protected String armorAdj;
