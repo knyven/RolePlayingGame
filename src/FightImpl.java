@@ -23,6 +23,7 @@ public class FightImpl {
         this.player2 = player2;
         this.armorList = armorList;
         this.playerTurn = true;
+        this.armorTotal = 10;
     }
 
     public void fight() {
@@ -30,7 +31,7 @@ public class FightImpl {
         System.out.println("Player 1: " + player1.getName() + " vs Player 2: " + player2.getName());
         System.out.println("Player 1: " + player1.getAttackStrength() + " vs Player 2: " + player2.getAttackStrength());
 
-        while (armorList.isEmpty()) {
+        while (!armorList.isEmpty()) {
             pickUpArmor();
         }
 
@@ -38,9 +39,9 @@ public class FightImpl {
         int player2Damage = player1.getAttackStrength() - player2.getDefenceStrength();
 
         if (player1Damage < player2Damage) {
-            System.out.printf("The winner of the fight is %s with %d damage dealt to %s", player1.getName(), player1Damage, player2.getName());
+            System.out.printf("The winner of the fight is %s with %d damage", player1.getName(), player1Damage);
         } else if (player2Damage < player1Damage) {
-            System.out.printf("The winner of the fight is %s with %d damage dealt to %s", player2.getName(), player2Damage, player1.getName());
+            System.out.printf("The winner of the fight is %s with %d damage", player2.getName(), player2Damage);
         } else if (player1Damage == player2Damage) {
             System.out.printf("The battle resulted in a tie! %s and %s both did %d damage!", player1.getName(), player2.getName(), player1Damage);
         }
@@ -55,6 +56,7 @@ public class FightImpl {
         }
         return null;
     }
+
 
     private Armor pickHandArmor() {
         for (Armor hand : armorList) {
@@ -99,9 +101,9 @@ public class FightImpl {
     }
 
     private Armor getRandomArmor() {
-        int random = (int) Math.random() * armorTotal % armorTotal;
+        int random = (int) (Math.random() * armorTotal) % armorTotal;
         while (random >= armorList.size()) {
-            random = (int) Math.random() * armorTotal % armorTotal;
+            random = (int) (Math.random() * armorTotal) % armorTotal;
         }
         return armorList.get(random);
     }
@@ -126,8 +128,8 @@ public class FightImpl {
         current.addArmor(newPiece);
         System.out.printf("The current combatant %s got %d attack and %d defense in this turn\n",
                 current.getName(), newPiece.getAttackStrength(), current.getDefenceStrength());
-        System.out.printf("The current player total attack is %d and total defense is %d",
-                current.getAttackStrength(), current.getDefenceStrength());
+        System.out.printf("The current player %s total attack is %d and total defense is %d\n",
+                current.getName(), current.getAttackStrength(), current.getDefenceStrength());
         armorList.remove(newPiece);
         playerTurn = !playerTurn;
         return;

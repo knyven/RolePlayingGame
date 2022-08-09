@@ -47,6 +47,7 @@ public class FightImplTest {
         armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
         FightImpl fight1 = new FightImpl(player1, player2, armorList);
         fight1.fight();
+        System.out.println(player1.toString());
     }
 
 
