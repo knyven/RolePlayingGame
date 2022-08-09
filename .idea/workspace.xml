@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="4th upload">
-      <change afterPath="$PROJECT_DIR$/src/ArmorType.java" afterDir="false" />
+    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_9_2022_3_56_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_9_2022_3_56_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Armor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ArmorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArmorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FightImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FightImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FootArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FootArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HandArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HandArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HeadArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HeadArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gearType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/FightImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FightImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PlayerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PlayerImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +25,9 @@
         <option value="JUnit4 Test Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/RolePlayingGame" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -50,20 +46,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "last_opened_file_path": "C:/Users/vknya/OneDrive/Documents/School/Northeastern/CS 5004/BigNumber"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vknya/OneDrive/Documents/School/Northeastern/CS 5004/BigNumber&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />

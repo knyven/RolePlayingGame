@@ -32,30 +32,60 @@ abstract class ArmorImpl implements Armor {
     }
     abstract protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, ArmorType armorType);
 
+    /**
+     * Accessor for the name of the armor.
+     *
+     * @return the name
+     */
     @Override
     public String getArmorName() {
         return this.armorName;
     }
 
+    /**
+     * Accessor for the adjective of the armor.
+     *
+     * @return the adjective
+     */
     @Override
     public String getArmorAdj() {
         return this.armorAdj;
     }
 
+    /**
+     * Accessor for the combined adj and noun name.
+     *
+     * @return the name
+     */
     @Override
     public String getArmorComboName() {
         return this.armorComboName;
     }
 
+    /**
+     * Accessor for the attack stat of the armor.
+     *
+     * @return the attack strength
+     */
     @Override
     public int getAttackStrength() {
         return this.attackStrength;
     }
-
+    /**
+     * Accessor for the defense stat of the armor.
+     *
+     * @return the defensive strength
+     */
     @Override
     public int getDefenceStrength() {
         return this.defenceStrength;
     }
+
+    /**
+     * Accessor for the type or armor.
+     *
+     * @return the armor type
+     */
 
     @Override
     public ArmorType getArmorType() {

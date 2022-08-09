@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Class representing the fight occurring between two players.
+ */
+
 public class FightImpl {
 
     private Player player1;
@@ -10,6 +14,13 @@ public class FightImpl {
 
     private int armorTotal;
 
+    /**
+     * Constructor for a FightImpl.
+     *
+     * @param player1     the first player object involved in fight
+     * @param player2     the 2nd player object involved in fight
+     * @param armorList   ArrayList of armor pieces for the two combatants to choose from
+     */
     public FightImpl(Player player1, Player player2, ArrayList<Armor> armorList) {
 
         if (player1.getArmorSize() != 0 || player2.getArmorSize() != 0) {
@@ -25,6 +36,12 @@ public class FightImpl {
         this.playerTurn = true;
         this.armorTotal = 10;
     }
+
+    /**
+     * Method for two players to fight.
+     *
+     *
+     */
 
     public void fight() {
         System.out.println("Fight started!");
@@ -50,6 +67,10 @@ public class FightImpl {
         return;
     }
 
+    /**
+     * Method for head armor piece to be picked.
+     *
+     */
     private Armor pickHeadArmor() {
         for (Armor head : armorList) {
             if (head.getArmorType() == ArmorType.headARMOR) {
@@ -59,7 +80,10 @@ public class FightImpl {
         return null;
     }
 
-
+    /**
+     * Method for hand armor piece to be picked.
+     *
+     */
     private Armor pickHandArmor() {
         for (Armor hand : armorList) {
             if (hand.getArmorType() == ArmorType.handARMOR) {
@@ -68,7 +92,10 @@ public class FightImpl {
         }
         return null;
     }
-
+    /**
+     * Method for foot armor piece to be picked.
+     *
+     */
     private Armor pickFootArmor() {
         for (Armor foot : armorList) {
             if (foot.getArmorType() == ArmorType.footARMOR) {
@@ -77,7 +104,11 @@ public class FightImpl {
         }
         return null;
     }
-
+    /**
+     * Method for highest attack stat armor piece to be picked.
+     *
+     * @return highestAttackGear
+     */
     private Armor getHighestAttackArmor() {
         Armor highestAttackGear = armorList.get(0);
         for (Armor armors : armorList) {
@@ -90,6 +121,12 @@ public class FightImpl {
         return highestAttackGear;
     }
 
+    /**
+     * Method for highest defensive armor piece to be picked.
+     *
+     * @return highestDefenseGear
+     */
+
     private Armor getHighestDefenseArmor() {
         Armor highestDefenseGear = armorList.get(0);
         for (Armor armors : armorList) {
@@ -101,7 +138,11 @@ public class FightImpl {
         }
         return highestDefenseGear;
     }
-
+    /**
+     * Method for random armor piece to be picked from armorList.
+     *
+     * @return random armor piece
+     */
     private Armor getRandomArmor() {
         int random = (int) (Math.random() * armorTotal) % armorTotal;
         while (random >= armorList.size()) {
@@ -109,7 +150,11 @@ public class FightImpl {
         }
         return armorList.get(random);
     }
-
+    /**
+     * Method for two combatants to pick pieces of armor turn by turn
+     *
+     *
+     */
     private void pickUpArmor() {
         PlayerImpl current = (PlayerImpl) (playerTurn ? player1 : player2);
         Armor newPiece;
