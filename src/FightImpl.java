@@ -28,12 +28,14 @@ public class FightImpl {
 
     public void fight() {
         System.out.println("Fight started!");
-        System.out.println("Player 1: " + player1.getName() + " vs Player 2: " + player2.getName());
-        System.out.println("Player 1: " + player1.getAttackStrength() + " vs Player 2: " + player2.getAttackStrength());
+        //System.out.println("Player 1: " + player1.getName() + " vs Player 2: " + player2.getName());
+        //System.out.println("Player 1: " + player1.getAttackStrength() + " vs Player 2: " + player2.getAttackStrength());
+
 
         while (!armorList.isEmpty()) {
             pickUpArmor();
         }
+
 
         int player1Damage = player2.getAttackStrength() - player1.getDefenceStrength();
         int player2Damage = player1.getAttackStrength() - player2.getDefenceStrength();
@@ -50,7 +52,7 @@ public class FightImpl {
 
     private Armor pickHeadArmor() {
         for (Armor head : armorList) {
-            if (head.getArmorType() == gearType.headGear) {
+            if (head.getArmorType() == ArmorType.headARMOR) {
                 return head;
             }
         }
@@ -60,7 +62,7 @@ public class FightImpl {
 
     private Armor pickHandArmor() {
         for (Armor hand : armorList) {
-            if (hand.getArmorType() == gearType.handGear) {
+            if (hand.getArmorType() == ArmorType.handARMOR) {
                 return hand;
             }
         }
@@ -69,7 +71,7 @@ public class FightImpl {
 
     private Armor pickFootArmor() {
         for (Armor foot : armorList) {
-            if (foot.getArmorType() == gearType.footGear) {
+            if (foot.getArmorType() == ArmorType.footARMOR) {
                 return foot;
             }
         }
@@ -126,9 +128,9 @@ public class FightImpl {
         }
 
         current.addArmor(newPiece);
-        System.out.printf("The current combatant %s got %d attack and %d defense in this turn\n",
-                current.getName(), newPiece.getAttackStrength(), current.getDefenceStrength());
-        System.out.printf("The current player %s total attack is %d and total defense is %d\n",
+        System.out.printf("This round %s picked up %s, which have/has an attack strength of: %d  and defence strength of: %d\n",
+                current.getName(), newPiece.getArmorComboName(),newPiece.getAttackStrength() ,newPiece.getDefenceStrength());
+        System.out.printf("Now %s has a total attack power of: %d and total defense power of: %d\n",
                 current.getName(), current.getAttackStrength(), current.getDefenceStrength());
         armorList.remove(newPiece);
         playerTurn = !playerTurn;

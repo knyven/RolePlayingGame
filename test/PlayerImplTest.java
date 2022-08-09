@@ -5,18 +5,18 @@ public class PlayerImplTest {
     PlayerImpl player1 = new PlayerImpl("Player1", 10, 10);
     PlayerImpl player2 = new PlayerImpl("Player2", 10, 10);
 
-    HeadArmor headArmor1 = new HeadArmor("HeadArmor", "HeadArmorAdj", 10, 10, gearType.headGear);
-    HeadArmor headArmor2 = new HeadArmor("HeadArmor2", "HeadArmorAdj2", 10, 10, gearType.headGear);
+    HeadArmor headArmor1 = new HeadArmor("HeadArmor", "HeadArmorAdj", 10, 10);
+    HeadArmor headArmor2 = new HeadArmor("HeadArmor2", "HeadArmorAdj2", 10, 10);
 
-    HandArmor handArmor1 = new HandArmor("HandArmor1", "HandArmorAdj1", 10, 10, gearType.handGear);
-    HandArmor handArmor2 = new HandArmor("HandArmor2", "HandArmorAdj2", 10, 10, gearType.handGear);
-    HandArmor handArmor3 = new HandArmor("HandArmor3", "HandArmorAdj3", 10, 10, gearType.handGear);
-    HandArmor handArmor4 = new HandArmor("HandArmor4", "HandArmorAdj4", 10, 10, gearType.handGear);
+    HandArmor handArmor1 = new HandArmor("HandArmor1", "HandArmorAdj1", 10, 10);
+    HandArmor handArmor2 = new HandArmor("HandArmor2", "HandArmorAdj2", 10, 10);
+    HandArmor handArmor3 = new HandArmor("HandArmor3", "HandArmorAdj3", 10, 10);
+    HandArmor handArmor4 = new HandArmor("HandArmor4", "HandArmorAdj4", 10, 10);
 
-    FootArmor footArmor1 = new FootArmor("Sneakers", "Lightening", 10, 10, gearType.footGear);
-    FootArmor footArmor2 = new FootArmor("Hoverboard", "Happy", 10, 10, gearType.footGear);
-    FootArmor footArmor3 = new FootArmor("Sandals", "Scurrying", 10, 10, gearType.footGear);
-    FootArmor footArmor4 = new FootArmor("FootArmor4", "FootArmorAdj4", 10, 10, gearType.footGear);
+    FootArmor footArmor1 = new FootArmor("Sneakers", "Lightening", 10, 10);
+    FootArmor footArmor2 = new FootArmor("Hoverboard", "Happy", 10, 10);
+    FootArmor footArmor3 = new FootArmor("Sandals", "Scurrying", 10, 10);
+    FootArmor footArmor4 = new FootArmor("FootArmor4", "FootArmorAdj4", 10, 10);
 
     @org.junit.Test
     public void getName() {

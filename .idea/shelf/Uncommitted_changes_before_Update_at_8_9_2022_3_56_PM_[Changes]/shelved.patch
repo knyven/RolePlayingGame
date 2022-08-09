@@ -1,0 +1,582 @@
+Index: src/gearType.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/gearType.java b/src/ArmorType.java
+rename from src/gearType.java
+rename to src/ArmorType.java
+--- a/src/gearType.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/ArmorType.java	(date 1660074993911)
+@@ -1,5 +1,5 @@
+-public enum gearType {
+-    headGear,
+-    handGear,
+-    footGear,
++public enum ArmorType {
++    handARMOR,
++    footARMOR,
++    headARMOR,
+ }
+Index: src/PlayerImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class PlayerImpl implements Player{\r\n\r\n    private String name;\r\n    private int attackStrength;\r\n    private int defenceStrength;\r\n    private Armor headArmor;\r\n    private ArrayList<Armor> handArmor;\r\n    private ArrayList<Armor> footArmor;\r\n\r\n\r\n    // initialize player to have a name and no gear and no attack or defence strength\r\n    public PlayerImpl(String name, int attackStrength, int defenceStrength) {\r\n        if(name == null) {\r\n            throw new IllegalArgumentException(\"Name cannot be null\");\r\n        }\r\n        if (attackStrength < 0 || defenceStrength < 0) {\r\n            throw new IllegalArgumentException(\"Attack strength or defence strength \" +\r\n                    \"cannot be negative\");\r\n        }\r\n        this.name = name;\r\n        this.attackStrength = attackStrength;\r\n        this.defenceStrength = defenceStrength;\r\n        this.headArmor = null;\r\n        this.handArmor = new ArrayList<>();\r\n        this.footArmor = new ArrayList<>();\r\n    }\r\n\r\n\r\n    @Override\r\n    public String getName() {\r\n        return this.name;\r\n    }\r\n\r\n    @Override\r\n    public int getAttackStrength() {\r\n        int totalAttack = this.attackStrength;\r\n        if (this.headArmor != null) {\r\n            totalAttack += this.headArmor.getAttackStrength();\r\n        }\r\n\r\n        for (Armor armor : this.handArmor) {\r\n            totalAttack += armor.getAttackStrength();\r\n        }\r\n        for (Armor armor : this.footArmor) {\r\n            totalAttack += armor.getAttackStrength();\r\n        }\r\n        return totalAttack;\r\n    }\r\n\r\n    @Override\r\n    public int getDefenceStrength() {\r\n        int totalDefence = this.defenceStrength;\r\n        if (this.headArmor != null) {\r\n            totalDefence += this.headArmor.getAttackStrength();\r\n        }\r\n        for (Armor armor : this.handArmor) {\r\n           totalDefence += armor.getDefenceStrength();\r\n        }\r\n        for (Armor armor : this.footArmor) {\r\n            totalDefence += armor.getDefenceStrength();\r\n        }\r\n        return totalDefence;\r\n    }\r\n\r\n    @Override\r\n    public void addArmor(Armor armor) {\r\n        // if no armor is passed in raise exception\r\n        if(armor == null)\r\n        {\r\n            throw new IllegalArgumentException(\"Armor cannot be null\");\r\n        }\r\n        // if armor is headgear check is player has headgear\r\n        if (armor.getArmorType() == gearType.headGear)\r\n        {\r\n            // if player has headgear combine the pieces\r\n            if(hasHeadArmor())\r\n            {\r\n                Armor newHeadArmor = this.headArmor.combineArmor(armor);\r\n                this.headArmor = newHeadArmor;\r\n            }\r\n            else\r\n            {\r\n                this.headArmor = armor;\r\n            }\r\n        }\r\n        else if (armor.getArmorType() == gearType.handGear)\r\n        {\r\n            if(isHandFull())\r\n            {\r\n                Armor newHandArmor = this.handArmor.get(1).combineArmor(armor);\r\n                this.handArmor.set(1, newHandArmor);\r\n            }\r\n            else\r\n            {\r\n               this.handArmor.add(armor);\r\n            }\r\n        }\r\n        else if (armor.getArmorType() == gearType.footGear)\r\n        {\r\n           if(isFootFull())\r\n           {\r\n               Armor newFootArmor = this.footArmor.get(1).combineArmor(armor);\r\n               this.footArmor.set(1, newFootArmor);\r\n           }\r\n           else\r\n           {\r\n               this.footArmor.add(armor);\r\n           }\r\n        }\r\n    }\r\n\r\n    public boolean hasHeadArmor() {\r\n        return this.headArmor != null;\r\n    }\r\n\r\n    public boolean isHandFull() {\r\n        return this.handArmor.size() == 2;\r\n    }\r\n\r\n    public boolean isFootFull() {\r\n        return this.footArmor.size() == 2;\r\n    }\r\n\r\n    public int getArmorSize(){\r\n        return headArmor == null? handArmor.size() + footArmor.size() : handArmor.size() + footArmor.size() + 1;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n\r\n\r\n        StringBuilder returnString = new StringBuilder();\r\n\r\n        returnString.append(\"Player: \" + this.name + \"\\n\");\r\n        returnString.append(\"Attack Strength: \" + this.getAttackStrength() + \"\\n\");\r\n        returnString.append(\"Defence Strength: \" + this.getDefenceStrength() + \"\\n\");\r\n        if(this.headArmor == null)\r\n        {\r\n            returnString.append(\"No head armor present!\" + \"\\n\");\r\n        }\r\n        else if(this.headArmor != null)\r\n        {\r\n            returnString.append(\"Head armor: \" + this.headArmor.getArmorComboName() + \"\\n\");\r\n        }\r\n\r\n\r\n        for(Armor armor : this.handArmor)\r\n        {\r\n            returnString.append(\"Hand Armor: \" + armor.getArmorComboName() + \"\\n\");\r\n        }\r\n        for(Armor armor : this.footArmor)\r\n        {\r\n            returnString.append(\"Foot Armor: \" + armor.getArmorComboName() + \"\\n\");\r\n        }\r\n        return returnString.toString();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/PlayerImpl.java b/src/PlayerImpl.java
+--- a/src/PlayerImpl.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/PlayerImpl.java	(date 1660074993929)
+@@ -1,14 +1,13 @@
+ import java.util.ArrayList;
+-import java.util.List;
+ 
+ public class PlayerImpl implements Player{
+ 
+     private String name;
+-    private int attackStrength;
+-    private int defenceStrength;
++    private final int attackStrength;
++    private final int defenceStrength;
+     private Armor headArmor;
+-    private ArrayList<Armor> handArmor;
+-    private ArrayList<Armor> footArmor;
++    private final ArrayList<Armor> handArmor;
++    private final ArrayList<Armor> footArmor;
+ 
+ 
+     // initialize player to have a name and no gear and no attack or defence strength
+@@ -73,7 +72,7 @@
+             throw new IllegalArgumentException("Armor cannot be null");
+         }
+         // if armor is headgear check is player has headgear
+-        if (armor.getArmorType() == gearType.headGear)
++        if (armor.getArmorType() == ArmorType.headARMOR)
+         {
+             // if player has headgear combine the pieces
+             if(hasHeadArmor())
+@@ -86,7 +85,7 @@
+                 this.headArmor = armor;
+             }
+         }
+-        else if (armor.getArmorType() == gearType.handGear)
++        else if (armor.getArmorType() == ArmorType.handARMOR)
+         {
+             if(isHandFull())
+             {
+@@ -98,7 +97,7 @@
+                this.handArmor.add(armor);
+             }
+         }
+-        else if (armor.getArmorType() == gearType.footGear)
++        else if (armor.getArmorType() == ArmorType.footARMOR)
+         {
+            if(isFootFull())
+            {
+Index: src/Armor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public interface Armor {\r\n    // getters for getting gear name, adj and armor combo name\r\n    String getArmorName();\r\n    String getArmorAdj();\r\n    String getArmorComboName();\r\n\r\n    // getters for getting defense value and attack value\r\n    int getAttackStrength();\r\n    int getDefenceStrength();\r\n\r\n    // getter for getting armor type\r\n    gearType getArmorType();\r\n\r\n    // main function to combine armor in either hand or foot armor into combo armor\r\n    Armor combineArmor(Armor armor);\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Armor.java b/src/Armor.java
+--- a/src/Armor.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/Armor.java	(date 1660074993916)
+@@ -9,7 +9,7 @@
+     int getDefenceStrength();
+ 
+     // getter for getting armor type
+-    gearType getArmorType();
++    ArmorType getArmorType();
+ 
+     // main function to combine armor in either hand or foot armor into combo armor
+     Armor combineArmor(Armor armor);
+Index: test/PlayerImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import static org.junit.Assert.*;\r\n\r\npublic class PlayerImplTest {\r\n\r\n    PlayerImpl player1 = new PlayerImpl(\"Player1\", 10, 10);\r\n    PlayerImpl player2 = new PlayerImpl(\"Player2\", 10, 10);\r\n\r\n    HeadArmor headArmor1 = new HeadArmor(\"HeadArmor\", \"HeadArmorAdj\", 10, 10, gearType.headGear);\r\n    HeadArmor headArmor2 = new HeadArmor(\"HeadArmor2\", \"HeadArmorAdj2\", 10, 10, gearType.headGear);\r\n\r\n    HandArmor handArmor1 = new HandArmor(\"HandArmor1\", \"HandArmorAdj1\", 10, 10, gearType.handGear);\r\n    HandArmor handArmor2 = new HandArmor(\"HandArmor2\", \"HandArmorAdj2\", 10, 10, gearType.handGear);\r\n    HandArmor handArmor3 = new HandArmor(\"HandArmor3\", \"HandArmorAdj3\", 10, 10, gearType.handGear);\r\n    HandArmor handArmor4 = new HandArmor(\"HandArmor4\", \"HandArmorAdj4\", 10, 10, gearType.handGear);\r\n\r\n    FootArmor footArmor1 = new FootArmor(\"Sneakers\", \"Lightening\", 10, 10, gearType.footGear);\r\n    FootArmor footArmor2 = new FootArmor(\"Hoverboard\", \"Happy\", 10, 10, gearType.footGear);\r\n    FootArmor footArmor3 = new FootArmor(\"Sandals\", \"Scurrying\", 10, 10, gearType.footGear);\r\n    FootArmor footArmor4 = new FootArmor(\"FootArmor4\", \"FootArmorAdj4\", 10, 10, gearType.footGear);\r\n\r\n    @org.junit.Test\r\n    public void getName() {\r\n        assertEquals(\"Player1\", player1.getName());\r\n        assertEquals(\"Player2\", player2.getName());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void getAttackStrength() {\r\n        assertEquals(10, player1.getAttackStrength());\r\n        assertEquals(10, player2.getAttackStrength());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void getDefenceStrength() {\r\n        assertEquals(10, player1.getDefenceStrength());\r\n        assertEquals(10, player2.getDefenceStrength());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void getAttackStrengthException()\r\n    {\r\n        assertEquals(10, player1.getAttackStrength());\r\n        assertEquals(10, player2.getAttackStrength());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void getDefenceStrengthException() {\r\n        assertEquals(10, player1.getDefenceStrength());\r\n        assertEquals(10, player2.getDefenceStrength());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void addArmor() {\r\n        player1.addArmor(headArmor1);\r\n        player1.addArmor(handArmor1);\r\n        player1.addArmor(handArmor2);\r\n        player1.addArmor(footArmor1);\r\n        player1.addArmor(footArmor2);\r\n\r\n        player2.addArmor(headArmor2);\r\n        player2.addArmor(handArmor3);\r\n        player2.addArmor(handArmor4);\r\n        player2.addArmor(footArmor3);\r\n        player2.addArmor(footArmor4);\r\n\r\n        assertEquals(60, player1.getAttackStrength());\r\n        assertEquals(60, player1.getDefenceStrength());\r\n        System.out.println(player1.toString());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void combiningArmor(){\r\n\r\n        player1.addArmor(footArmor1);\r\n        player1.addArmor(footArmor2);\r\n        player1.addArmor(footArmor3);\r\n        assertEquals(\r\n        \"\"\" \r\n        Player: Player1\r\n        Attack Strength: 40\r\n        Defence Strength: 40\r\n        No head armor present!\r\n        Foot Armor: Lightening Sneakers\r\n        Foot Armor: Happy, Scurrying Hoverboard\r\n        \"\"\" , player1.toString());\r\n    }\r\n\r\n\r\n    @org.junit.Test (expected = IllegalArgumentException.class)\r\n    public void combiningArmorException() {\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/PlayerImplTest.java b/test/PlayerImplTest.java
+--- a/test/PlayerImplTest.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/test/PlayerImplTest.java	(date 1660074993894)
+@@ -5,18 +5,18 @@
+     PlayerImpl player1 = new PlayerImpl("Player1", 10, 10);
+     PlayerImpl player2 = new PlayerImpl("Player2", 10, 10);
+ 
+-    HeadArmor headArmor1 = new HeadArmor("HeadArmor", "HeadArmorAdj", 10, 10, gearType.headGear);
+-    HeadArmor headArmor2 = new HeadArmor("HeadArmor2", "HeadArmorAdj2", 10, 10, gearType.headGear);
++    HeadArmor headArmor1 = new HeadArmor("HeadArmor", "HeadArmorAdj", 10, 10);
++    HeadArmor headArmor2 = new HeadArmor("HeadArmor2", "HeadArmorAdj2", 10, 10);
+ 
+-    HandArmor handArmor1 = new HandArmor("HandArmor1", "HandArmorAdj1", 10, 10, gearType.handGear);
+-    HandArmor handArmor2 = new HandArmor("HandArmor2", "HandArmorAdj2", 10, 10, gearType.handGear);
+-    HandArmor handArmor3 = new HandArmor("HandArmor3", "HandArmorAdj3", 10, 10, gearType.handGear);
+-    HandArmor handArmor4 = new HandArmor("HandArmor4", "HandArmorAdj4", 10, 10, gearType.handGear);
++    HandArmor handArmor1 = new HandArmor("HandArmor1", "HandArmorAdj1", 10, 10);
++    HandArmor handArmor2 = new HandArmor("HandArmor2", "HandArmorAdj2", 10, 10);
++    HandArmor handArmor3 = new HandArmor("HandArmor3", "HandArmorAdj3", 10, 10);
++    HandArmor handArmor4 = new HandArmor("HandArmor4", "HandArmorAdj4", 10, 10);
+ 
+-    FootArmor footArmor1 = new FootArmor("Sneakers", "Lightening", 10, 10, gearType.footGear);
+-    FootArmor footArmor2 = new FootArmor("Hoverboard", "Happy", 10, 10, gearType.footGear);
+-    FootArmor footArmor3 = new FootArmor("Sandals", "Scurrying", 10, 10, gearType.footGear);
+-    FootArmor footArmor4 = new FootArmor("FootArmor4", "FootArmorAdj4", 10, 10, gearType.footGear);
++    FootArmor footArmor1 = new FootArmor("Sneakers", "Lightening", 10, 10);
++    FootArmor footArmor2 = new FootArmor("Hoverboard", "Happy", 10, 10);
++    FootArmor footArmor3 = new FootArmor("Sandals", "Scurrying", 10, 10);
++    FootArmor footArmor4 = new FootArmor("FootArmor4", "FootArmorAdj4", 10, 10);
+ 
+     @org.junit.Test
+     public void getName() {
+Index: test/FightImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.junit.Test;\r\n\r\nimport java.util.ArrayList;\r\n\r\nimport static org.junit.Assert.*;\r\n\r\npublic class FightImplTest {\r\n\r\n    @Test\r\n    public void fightTest() {\r\n\r\n        Player player1 = new PlayerImpl(\"Player1\", 10, 10);\r\n        Player player2 = new PlayerImpl(\"Player2\", 10, 10);\r\n        ArrayList<Armor> armorList = new ArrayList<>();\r\n        armorList.add(new FootArmor(\"Sneakers\", \"Lightening\", 10, 5, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Hoverboard\", \"Scurrying\",35, 2, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Sandals\", \"Sharp\", 30, 10, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Boots\", \"Fearful\", 40, 0, gearType.footGear));\r\n        armorList.add(new HandArmor(\"Sword\", \"Justice\", 40, 10, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Shield\", \"Protection\", 0, 75, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Gloves\", \"Righteousness\", 0, 50, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Blade\", \"Hateful\", 55, 0, gearType.headGear));\r\n\r\n        armorList.add(new HeadArmor(\"Helmet\", \"Flurrying\", 0, 50, gearType.headGear));\r\n        armorList.add(new HeadArmor(\"Hat\", \"Protection\", 0, 50, gearType.headGear));\r\n        FightImpl fight1 = new FightImpl(player1, player2, armorList);\r\n        fight1.fight();\r\n    }\r\n\r\n\r\n    @Test\r\n    public void fightTest2() {\r\n\r\n        Player player1 = new PlayerImpl(\"Player1\", 10, 10);\r\n        Player player2 = new PlayerImpl(\"Player2\", 10, 10);\r\n        ArrayList<Armor> armorList = new ArrayList<>();\r\n        armorList.add(new FootArmor(\"Sneakers\", \"Lightening\", 10, 5, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Hoverboard\", \"Scurrying\",35, 2, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Sandals\", \"Sharp\", 30, 10, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Boots\", \"Fearful\", 40, 0, gearType.footGear));\r\n        armorList.add(new HandArmor(\"Sword\", \"Justice\", 40, 10, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Shield\", \"Protection\", 0, 75, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Gloves\", \"Righteousness\", 0, 50, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Blade\", \"Hateful\", 55, 0, gearType.headGear));\r\n\r\n        armorList.add(new HeadArmor(\"Helmet\", \"Flurrying\", 0, 50, gearType.headGear));\r\n        armorList.add(new HeadArmor(\"Hat\", \"Protection\", 0, 50, gearType.headGear));\r\n        FightImpl fight1 = new FightImpl(player1, player2, armorList);\r\n        fight1.fight();\r\n    }\r\n\r\n\r\n    @Test\r\n    public void fightTest3() {\r\n\r\n        Player player1 = new PlayerImpl(\"Player1\", 10, 10);\r\n        Player player2 = new PlayerImpl(\"Player2\", 10, 10);\r\n        ArrayList<Armor> armorList = new ArrayList<>();\r\n        armorList.add(new FootArmor(\"Sneakers\", \"Lightening\", 10, 5, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Hoverboard\", \"Scurrying\",35, 2, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Sandals\", \"Sharp\", 30, 10, gearType.footGear));\r\n        armorList.add(new FootArmor(\"Boots\", \"Fearful\", 40, 0, gearType.footGear));\r\n        armorList.add(new HandArmor(\"Sword\", \"Justice\", 40, 10, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Shield\", \"Protection\", 0, 75, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Gloves\", \"Righteousness\", 0, 50, gearType.handGear));\r\n        armorList.add(new HandArmor(\"Blade\", \"Hateful\", 55, 0, gearType.headGear));\r\n\r\n        armorList.add(new HeadArmor(\"Helmet\", \"Flurrying\", 0, 50, gearType.headGear));\r\n        armorList.add(new HeadArmor(\"Hat\", \"Protection\", 0, 50, gearType.headGear));\r\n        FightImpl fight1 = new FightImpl(player1, player2, armorList);\r\n        fight1.fight();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/FightImplTest.java b/test/FightImplTest.java
+--- a/test/FightImplTest.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/test/FightImplTest.java	(date 1660074993905)
+@@ -2,27 +2,25 @@
+ 
+ import java.util.ArrayList;
+ 
+-import static org.junit.Assert.*;
+-
+ public class FightImplTest {
+ 
+     @Test
+     public void fightTest() {
+ 
+-        Player player1 = new PlayerImpl("Player1", 10, 10);
+-        Player player2 = new PlayerImpl("Player2", 10, 10);
++        Player player1 = new PlayerImpl("Venya", 10, 10);
++        Player player2 = new PlayerImpl("Sahil", 10, 10);
+         ArrayList<Armor> armorList = new ArrayList<>();
+-        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, gearType.footGear));
+-        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, gearType.footGear));
+-        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, gearType.footGear));
+-        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, gearType.footGear));
+-        armorList.add(new HandArmor("Sword", "Justice", 40, 10, gearType.handGear));
+-        armorList.add(new HandArmor("Shield", "Protection", 0, 75, gearType.handGear));
+-        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, gearType.handGear));
+-        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, gearType.headGear));
++        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, ArmorType.footGear));
++        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, ArmorType.footGear));
++        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, ArmorType.footGear));
++        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, ArmorType.footGear));
++        armorList.add(new HandArmor("Sword", "Justice", 40, 10, ArmorType.handGear));
++        armorList.add(new HandArmor("Shield", "Protection", 0, 75, ArmorType.handGear));
++        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, ArmorType.handGear));
++        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, ArmorType.headGear));
+ 
+-        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, gearType.headGear));
+-        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
++        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, ArmorType.headGear));
++        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, ArmorType.headGear));
+         FightImpl fight1 = new FightImpl(player1, player2, armorList);
+         fight1.fight();
+     }
+@@ -34,17 +32,17 @@
+         Player player1 = new PlayerImpl("Player1", 10, 10);
+         Player player2 = new PlayerImpl("Player2", 10, 10);
+         ArrayList<Armor> armorList = new ArrayList<>();
+-        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, gearType.footGear));
+-        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, gearType.footGear));
+-        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, gearType.footGear));
+-        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, gearType.footGear));
+-        armorList.add(new HandArmor("Sword", "Justice", 40, 10, gearType.handGear));
+-        armorList.add(new HandArmor("Shield", "Protection", 0, 75, gearType.handGear));
+-        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, gearType.handGear));
+-        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, gearType.headGear));
++        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, ArmorType.footGear));
++        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, ArmorType.footGear));
++        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, ArmorType.footGear));
++        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, ArmorType.footGear));
++        armorList.add(new HandArmor("Sword", "Justice", 40, 10, ArmorType.handGear));
++        armorList.add(new HandArmor("Shield", "Protection", 0, 75, ArmorType.handGear));
++        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, ArmorType.handGear));
++        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, ArmorType.headGear));
+ 
+-        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, gearType.headGear));
+-        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
++        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, ArmorType.headGear));
++        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, ArmorType.headGear));
+         FightImpl fight1 = new FightImpl(player1, player2, armorList);
+         fight1.fight();
+     }
+@@ -56,17 +54,17 @@
+         Player player1 = new PlayerImpl("Player1", 10, 10);
+         Player player2 = new PlayerImpl("Player2", 10, 10);
+         ArrayList<Armor> armorList = new ArrayList<>();
+-        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, gearType.footGear));
+-        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, gearType.footGear));
+-        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, gearType.footGear));
+-        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, gearType.footGear));
+-        armorList.add(new HandArmor("Sword", "Justice", 40, 10, gearType.handGear));
+-        armorList.add(new HandArmor("Shield", "Protection", 0, 75, gearType.handGear));
+-        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, gearType.handGear));
+-        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, gearType.headGear));
++        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, ArmorType.footGear));
++        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, ArmorType.footGear));
++        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, ArmorType.footGear));
++        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, ArmorType.footGear));
++        armorList.add(new HandArmor("Sword", "Justice", 40, 10, ArmorType.handGear));
++        armorList.add(new HandArmor("Shield", "Protection", 0, 75, ArmorType.handGear));
++        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, ArmorType.handGear));
++        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, ArmorType.headGear));
+ 
+-        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, gearType.headGear));
+-        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
++        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, ArmorType.headGear));
++        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, ArmorType.headGear));
+         FightImpl fight1 = new FightImpl(player1, player2, armorList);
+         fight1.fight();
+     }
+Index: src/FootArmor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class FootArmor extends ArmorImpl {\r\n\r\n    public FootArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {\r\n\r\n        if(armorName == null || armorAdj == null)\r\n        {\r\n            throw new IllegalArgumentException(\"Armor name and adjective cannot be null\");\r\n        }\r\n        if(attackStrength < 0 || defenceStrength < 0)\r\n        {\r\n            throw new IllegalArgumentException(\"Attack and defence strength cannot be negative\");\r\n        }\r\n\r\n        this.armorName = armorName;\r\n        this.armorAdj = armorAdj;\r\n        this.armorComboName = armorAdj + \" \" + armorName;\r\n        this.attackStrength = attackStrength;\r\n        this.defenceStrength = defenceStrength;\r\n        this.armorType = armorType;\r\n    }\r\n\r\n\r\n    @Override\r\n    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {\r\n        return new FootArmor(newName, newAdj, newAttack, newDefence, armorType);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/FootArmor.java b/src/FootArmor.java
+--- a/src/FootArmor.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/FootArmor.java	(date 1660074993881)
+@@ -1,6 +1,6 @@
+ public class FootArmor extends ArmorImpl {
+ 
+-    public FootArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {
++    public FootArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength) {
+ 
+         if(armorName == null || armorAdj == null)
+         {
+@@ -16,12 +16,12 @@
+         this.armorComboName = armorAdj + " " + armorName;
+         this.attackStrength = attackStrength;
+         this.defenceStrength = defenceStrength;
+-        this.armorType = armorType;
++        this.armorType = ArmorType.footARMOR;
+     }
+ 
+ 
+     @Override
+-    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {
+-        return new FootArmor(newName, newAdj, newAttack, newDefence, armorType);
++    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, ArmorType armorType) {
++        return new FootArmor(newName, newAdj, newAttack, newDefence);
+     }
+ }
+\ No newline at end of file
+Index: src/HeadArmor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class HeadArmor extends ArmorImpl {\r\n\r\n    public HeadArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {\r\n        this.armorName = armorName;\r\n        this.armorAdj = armorAdj;\r\n        this.armorComboName = armorAdj + \" \" + armorName;\r\n        this.attackStrength = attackStrength;\r\n        this.defenceStrength = defenceStrength;\r\n        this.armorType = armorType;\r\n    }\r\n\r\n    @Override\r\n    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {\r\n        return new HeadArmor(newName, newAdj, newAttack, newDefence, armorType);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/HeadArmor.java b/src/HeadArmor.java
+--- a/src/HeadArmor.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/HeadArmor.java	(date 1660074993887)
+@@ -1,16 +1,16 @@
+ public class HeadArmor extends ArmorImpl {
+ 
+-    public HeadArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {
++    public HeadArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength) {
+         this.armorName = armorName;
+         this.armorAdj = armorAdj;
+         this.armorComboName = armorAdj + " " + armorName;
+         this.attackStrength = attackStrength;
+         this.defenceStrength = defenceStrength;
+-        this.armorType = armorType;
++        this.armorType = ArmorType.headARMOR;
+     }
+ 
+     @Override
+-    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {
+-        return new HeadArmor(newName, newAdj, newAttack, newDefence, armorType);
++    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, ArmorType armorType) {
++        return new HeadArmor(newName, newAdj, newAttack, newDefence);
+     }
+ }
+\ No newline at end of file
+Index: src/HandArmor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class HandArmor extends ArmorImpl {\r\n\r\n    public HandArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {\r\n        this.armorName = armorName;\r\n        this.armorAdj = armorAdj;\r\n        this.armorComboName = armorAdj + \" \" + armorName;\r\n        this.attackStrength = attackStrength;\r\n        this.defenceStrength = defenceStrength;\r\n        this.armorType = armorType;\r\n    }\r\n\r\n    @Override\r\n    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {\r\n        return new HandArmor(newName, newAdj, newAttack, newDefence, armorType);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/HandArmor.java b/src/HandArmor.java
+--- a/src/HandArmor.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/HandArmor.java	(date 1660074993935)
+@@ -1,16 +1,16 @@
+ public class HandArmor extends ArmorImpl {
+ 
+-    public HandArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength, gearType armorType) {
++    public HandArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength) {
+         this.armorName = armorName;
+         this.armorAdj = armorAdj;
+         this.armorComboName = armorAdj + " " + armorName;
+         this.attackStrength = attackStrength;
+         this.defenceStrength = defenceStrength;
+-        this.armorType = armorType;
++        this.armorType = ArmorType.handARMOR;
+     }
+ 
+     @Override
+-    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType) {
+-        return new HandArmor(newName, newAdj, newAttack, newDefence, armorType);
++    protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, ArmorType armorType) {
++        return new HandArmor(newName, newAdj, newAttack, newDefence);
+     }
+ }
+Index: src/ArmorImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public abstract class ArmorImpl implements Armor {\r\n    protected String armorName;\r\n    protected String armorAdj;\r\n    protected String armorComboName;\r\n    protected int attackStrength;\r\n    protected int defenceStrength;\r\n    protected gearType armorType;\r\n\r\n\r\n    @Override\r\n    public Armor combineArmor(Armor armor) {\r\n        // if armor passed in is null raise exception\r\n        if (armor == null) {\r\n            throw new IllegalArgumentException(\"Armor cannot be null\");\r\n        }\r\n        // instance of armor class should be the same\r\n        if (!(armor instanceof ArmorImpl)) {\r\n            throw new IllegalArgumentException(\"Armor must be of type ArmorImpl\");\r\n        }\r\n        // if armor passed in is of different type raise exception\r\n        if (armor.getArmorType() != this.armorType) {\r\n            throw new IllegalArgumentException(\"Armor cannot be of different type\");\r\n        }\r\n\r\n        String newName = this.armorName;\r\n        String newAdj = this.armorAdj + \", \" + armor.getArmorAdj();\r\n        int newAttack = this.attackStrength + armor.getAttackStrength();\r\n        int newDefence = this.defenceStrength + armor.getDefenceStrength();\r\n\r\n        return combineArmorParts(newName, newAdj, newAttack, newDefence, this.armorType);\r\n\r\n    }\r\n    abstract protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType);\r\n\r\n    @Override\r\n    public String getArmorName() {\r\n        return this.armorName;\r\n    }\r\n\r\n    @Override\r\n    public String getArmorAdj() {\r\n        return this.armorAdj;\r\n    }\r\n\r\n    @Override\r\n    public String getArmorComboName() {\r\n        return this.armorComboName;\r\n    }\r\n\r\n    @Override\r\n    public int getAttackStrength() {\r\n        return this.attackStrength;\r\n    }\r\n\r\n    @Override\r\n    public int getDefenceStrength() {\r\n        return this.defenceStrength;\r\n    }\r\n\r\n    @Override\r\n    public gearType getArmorType() {\r\n        return this.armorType;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"ArmorImpl{\" +\r\n                \"armorName='\" + armorName + '\\'' +\r\n                \", armorAdj='\" + armorAdj + '\\'' +\r\n                \", armorComboName='\" + armorComboName + '\\'' +\r\n                \", attackStrength=\" + attackStrength +\r\n                \", defenceStrength=\" + defenceStrength +\r\n                \", armorType=\" + armorType +\r\n                '}';\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ArmorImpl.java b/src/ArmorImpl.java
+--- a/src/ArmorImpl.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/ArmorImpl.java	(date 1660074993899)
+@@ -1,10 +1,10 @@
+-public abstract class ArmorImpl implements Armor {
++abstract class ArmorImpl implements Armor {
+     protected String armorName;
+     protected String armorAdj;
+     protected String armorComboName;
+     protected int attackStrength;
+     protected int defenceStrength;
+-    protected gearType armorType;
++    protected ArmorType armorType;
+ 
+ 
+     @Override
+@@ -30,7 +30,7 @@
+         return combineArmorParts(newName, newAdj, newAttack, newDefence, this.armorType);
+ 
+     }
+-    abstract protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType);
++    abstract protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, ArmorType armorType);
+ 
+     @Override
+     public String getArmorName() {
+@@ -58,7 +58,7 @@
+     }
+ 
+     @Override
+-    public gearType getArmorType() {
++    public ArmorType getArmorType() {
+         return this.armorType;
+     }
+ 
+Index: src/FightImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class FightImpl {\r\n\r\n    private Player player1;\r\n    private Player player2;\r\n    private ArrayList<Armor> armorList = new ArrayList<>();\r\n    private boolean playerTurn;\r\n\r\n\r\n    private int armorTotal;\r\n\r\n    public FightImpl(Player player1, Player player2, ArrayList<Armor> armorList) {\r\n\r\n        if (player1.getArmorSize() != 0 || player2.getArmorSize() != 0) {\r\n            throw new IllegalArgumentException(\"Combatants cannot have starting gears\");\r\n        }\r\n\r\n        if (armorList.size() != 10) {\r\n            throw new IllegalArgumentException(\"Total pieces of armor must amount to\" + armorTotal);\r\n        }\r\n        this.player1 = player1;\r\n        this.player2 = player2;\r\n        this.armorList = armorList;\r\n        this.playerTurn = true;\r\n    }\r\n\r\n    public void fight() {\r\n        System.out.println(\"Fight started!\");\r\n        System.out.println(\"Player 1: \" + player1.getName() + \" vs Player 2: \" + player2.getName());\r\n        System.out.println(\"Player 1: \" + player1.getAttackStrength() + \" vs Player 2: \" + player2.getAttackStrength());\r\n\r\n        while (armorList.isEmpty()) {\r\n            pickUpArmor();\r\n        }\r\n\r\n        int player1Damage = player2.getAttackStrength() - player1.getDefenceStrength();\r\n        int player2Damage = player1.getAttackStrength() - player2.getDefenceStrength();\r\n\r\n        if (player1Damage < player2Damage) {\r\n            System.out.printf(\"The winner of the fight is %s with %d damage dealt to %s\", player1.getName(), player1Damage, player2.getName());\r\n        } else if (player2Damage < player1Damage) {\r\n            System.out.printf(\"The winner of the fight is %s with %d damage dealt to %s\", player2.getName(), player2Damage, player1.getName());\r\n        } else if (player1Damage == player2Damage) {\r\n            System.out.printf(\"The battle resulted in a tie! %s and %s both did %d damage!\", player1.getName(), player2.getName(), player1Damage);\r\n        }\r\n        return;\r\n    }\r\n\r\n    private Armor pickHeadArmor() {\r\n        for (Armor head : armorList) {\r\n            if (head.getArmorType() == gearType.headGear) {\r\n                return head;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    private Armor pickHandArmor() {\r\n        for (Armor hand : armorList) {\r\n            if (hand.getArmorType() == gearType.handGear) {\r\n                return hand;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    private Armor pickFootArmor() {\r\n        for (Armor foot : armorList) {\r\n            if (foot.getArmorType() == gearType.footGear) {\r\n                return foot;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    private Armor getHighestAttackArmor() {\r\n        Armor highestAttackGear = armorList.get(0);\r\n        for (Armor armors : armorList) {\r\n            if (armors.getAttackStrength() == highestAttackGear.getAttackStrength()) {\r\n                return null;\r\n            } else if (armors.getAttackStrength() > highestAttackGear.getAttackStrength()) {\r\n                highestAttackGear = armors;\r\n            }\r\n        }\r\n        return highestAttackGear;\r\n    }\r\n\r\n    private Armor getHighestDefenseArmor() {\r\n        Armor highestDefenseGear = armorList.get(0);\r\n        for (Armor armors : armorList) {\r\n            if (armors.getDefenceStrength() == highestDefenseGear.getDefenceStrength()) {\r\n                return null;\r\n            } else if (armors.getAttackStrength() > highestDefenseGear.getAttackStrength()) {\r\n                highestDefenseGear = armors;\r\n            }\r\n        }\r\n        return highestDefenseGear;\r\n    }\r\n\r\n    private Armor getRandomArmor() {\r\n        int random = (int) Math.random() * armorTotal % armorTotal;\r\n        while (random >= armorList.size()) {\r\n            random = (int) Math.random() * armorTotal % armorTotal;\r\n        }\r\n        return armorList.get(random);\r\n    }\r\n\r\n    private void pickUpArmor() {\r\n        PlayerImpl current = (PlayerImpl) (playerTurn ? player1 : player2);\r\n        Armor newPiece;\r\n        if (!current.hasHeadArmor() && current.isHandFull() && current.isFootFull() && pickHeadArmor() != null) {\r\n            newPiece = pickHeadArmor();\r\n        } else if (current.hasHeadArmor() && !current.isHandFull() && current.isFootFull() && pickHandArmor() != null) {\r\n            newPiece = pickHandArmor();\r\n        } else if (current.hasHeadArmor() && current.isHandFull() && !current.isFootFull() && pickFootArmor() != null) {\r\n            newPiece = pickFootArmor();\r\n        } else if (getHighestAttackArmor() != null) {\r\n            newPiece = getHighestAttackArmor();\r\n        } else if (getHighestDefenseArmor() != null) {\r\n            newPiece = getHighestDefenseArmor();\r\n        } else {\r\n            newPiece = getRandomArmor();\r\n        }\r\n\r\n        current.addArmor(newPiece);\r\n        System.out.printf(\"The current combatant %s got %d attack and %d defense in this turn\\n\",\r\n                current.getName(), newPiece.getAttackStrength(), current.getDefenceStrength());\r\n        System.out.printf(\"The current player total attack is %d and total defense is %d\",\r\n                current.getAttackStrength(), current.getDefenceStrength());\r\n        armorList.remove(newPiece);\r\n        playerTurn = !playerTurn;\r\n        return;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/FightImpl.java b/src/FightImpl.java
+--- a/src/FightImpl.java	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/src/FightImpl.java	(date 1660074993923)
+@@ -30,9 +30,13 @@
+         System.out.println("Player 1: " + player1.getName() + " vs Player 2: " + player2.getName());
+         System.out.println("Player 1: " + player1.getAttackStrength() + " vs Player 2: " + player2.getAttackStrength());
+ 
+-        while (armorList.isEmpty()) {
++        while (!armorList.isEmpty()) {
++            System.out.println("About to pick armor!");
+             pickUpArmor();
++            System.out.println("Armor picked up!");
+         }
++        //System.out.println(player1.toString());
++        //System.out.println(player2.toString());
+ 
+         int player1Damage = player2.getAttackStrength() - player1.getDefenceStrength();
+         int player2Damage = player1.getAttackStrength() - player2.getDefenceStrength();
+@@ -49,16 +53,21 @@
+ 
+     private Armor pickHeadArmor() {
+         for (Armor head : armorList) {
+-            if (head.getArmorType() == gearType.headGear) {
++            System.out.println(head.toString());
++            if (head.getArmorType() == ArmorType.headGear)
++                System.out.println(head.toString());
+                 return head;
+-            }
++
+         }
+         return null;
+     }
+ 
+     private Armor pickHandArmor() {
+         for (Armor hand : armorList) {
+-            if (hand.getArmorType() == gearType.handGear) {
++            System.out.println(hand.toString());
++            if (hand.getArmorType() == ArmorType.handGear) {
++                System.out.println(hand.getArmorType());
++                System.out.println(hand.toString());
+                 return hand;
+             }
+         }
+@@ -67,7 +76,9 @@
+ 
+     private Armor pickFootArmor() {
+         for (Armor foot : armorList) {
+-            if (foot.getArmorType() == gearType.footGear) {
++            System.out.println(foot.toString());
++            if (foot.getArmorType() == ArmorType.footGear) {
++                System.out.println(foot.toString());
+                 return foot;
+             }
+         }
+@@ -109,17 +120,39 @@
+     private void pickUpArmor() {
+         PlayerImpl current = (PlayerImpl) (playerTurn ? player1 : player2);
+         Armor newPiece;
+-        if (!current.hasHeadArmor() && current.isHandFull() && current.isFootFull() && pickHeadArmor() != null) {
++        if (!current.hasHeadArmor() && current.isHandFull() && current.isFootFull() && pickHeadArmor() != null)
++        {
++            System.out.println("I made it to the pick up armor");
+             newPiece = pickHeadArmor();
+-        } else if (current.hasHeadArmor() && !current.isHandFull() && current.isFootFull() && pickHandArmor() != null) {
++        }
++        else if (current.hasHeadArmor() && !current.isHandFull() && current.isFootFull() && pickHandArmor() != null)
++        {
++            System.out.println("I made it to the pick up armor");
++
+             newPiece = pickHandArmor();
+-        } else if (current.hasHeadArmor() && current.isHandFull() && !current.isFootFull() && pickFootArmor() != null) {
++        }
++        else if (current.hasHeadArmor() && current.isHandFull() && !current.isFootFull() && pickFootArmor() != null)
++        {
++            System.out.println("I made it to the pick up armor");
++
+             newPiece = pickFootArmor();
+-        } else if (getHighestAttackArmor() != null) {
++        }
++        else if (getHighestAttackArmor() != null)
++        {
++            System.out.println("I made it to the pick up armor");
++
+             newPiece = getHighestAttackArmor();
+-        } else if (getHighestDefenseArmor() != null) {
++        }
++        else if (getHighestDefenseArmor() != null)
++        {
++            System.out.println("I made it to the pick up armor");
++
+             newPiece = getHighestDefenseArmor();
+-        } else {
++        }
++        else
++        {
++            System.out.println("I made it to the pick up armor");
++
+             newPiece = getRandomArmor();
+         }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"bdcd10b3-9c70-4a64-a87a-e71b1502cebf\" name=\"Changes\" comment=\"fight\">\r\n      <change beforePath=\"$PROJECT_DIR$/src/FightImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/FightImpl.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"JUnit4 Test Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2D2WMtYcSNLS6EAaSbqVmMEQseC\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/vknya/OneDrive/Documents/School/Northeastern/CS 5004/RolePlayingGame&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.PlayerImplTest.combiningArmor\">\r\n    <configuration name=\"PlayerImplTest.addArmor\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"RolePlayingGame\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"PlayerImplTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"addArmor\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PlayerImplTest.combiningArmor\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"RolePlayingGame\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"PlayerImplTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"combiningArmor\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PlayerImplTest.getName\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"RolePlayingGame\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"PlayerImplTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"getName\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.PlayerImplTest.combiningArmor\" />\r\n        <item itemvalue=\"JUnit.PlayerImplTest.addArmor\" />\r\n        <item itemvalue=\"JUnit.PlayerImplTest.getName\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"bdcd10b3-9c70-4a64-a87a-e71b1502cebf\" name=\"Changes\" comment=\"\" />\r\n      <created>1659897615790</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1659897615790</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"1st upload\">\r\n      <created>1659898152476</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659898152476</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"1st upload\">\r\n      <created>1659898207310</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659898207310</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"1st upload\">\r\n      <created>1659898392847</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659898392847</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"2nd upload\">\r\n      <created>1659899020429</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659899020429</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"3rd upload\">\r\n      <created>1659900633989</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659900633989</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"3rd upload\">\r\n      <created>1659900779222</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659900779222</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"3rd upload\">\r\n      <created>1659901083500</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659901083500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"3rd upload\">\r\n      <created>1659901570366</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659901570366</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"3rd upload\">\r\n      <created>1659907654491</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659907654491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"fight\">\r\n      <created>1659926769962</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659926769962</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"fight\">\r\n      <created>1659926829208</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659926829208</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"tests for player impl\">\r\n      <created>1659980608288</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659980608289</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"fight\">\r\n      <created>1659997630542</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659997630542</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"14\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"1st upload\" />\r\n    <MESSAGE value=\"2nd upload\" />\r\n    <MESSAGE value=\"3rd upload\" />\r\n    <MESSAGE value=\"tests for player impl\" />\r\n    <MESSAGE value=\"fight\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fight\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6931ac96699961138d0e15a7015ac92645e0e130)
++++ b/.idea/workspace.xml	(date 1660074993987)
+@@ -4,8 +4,18 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="fight">
++    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="4th upload">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Armor.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/ArmorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorImpl.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/FightImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FightImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/FootArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FootArmor.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/HandArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HandArmor.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/HeadArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HeadArmor.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/PlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/gearType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorType.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test/FightImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FightImplTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test/PlayerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PlayerImplTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -61,7 +71,17 @@
+       <recent name="" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.PlayerImplTest.combiningArmor">
++  <component name="RunManager" selected="JUnit.FightImplTest.fightTest">
++    <configuration name="FightImplTest.fightTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="RolePlayingGame" />
++      <option name="PACKAGE_NAME" value="" />
++      <option name="MAIN_CLASS_NAME" value="FightImplTest" />
++      <option name="METHOD_NAME" value="fightTest" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="PlayerImplTest.addArmor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="RolePlayingGame" />
+       <option name="PACKAGE_NAME" value="" />
+@@ -94,6 +114,7 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="JUnit.FightImplTest.fightTest" />
+         <item itemvalue="JUnit.PlayerImplTest.combiningArmor" />
+         <item itemvalue="JUnit.PlayerImplTest.addArmor" />
+         <item itemvalue="JUnit.PlayerImplTest.getName" />
+@@ -193,14 +214,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1659980608289</updated>
+     </task>
+-    <task id="LOCAL-00013" summary="fight">
+-      <created>1659997630542</created>
++    <task id="LOCAL-00013" summary="4th upload">
++      <created>1659998741235</created>
+       <option name="number" value="00013" />
+       <option name="presentableId" value="LOCAL-00013" />
+       <option name="project" value="LOCAL" />
+-      <updated>1659997630542</updated>
++      <updated>1659998741235</updated>
+     </task>
+-    <option name="localTasksCounter" value="14" />
++    <task id="LOCAL-00014" summary="4th upload">
++      <created>1659998747060</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1659998747060</updated>
++    </task>
++    <option name="localTasksCounter" value="15" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -218,8 +246,9 @@
+     <MESSAGE value="1st upload" />
+     <MESSAGE value="2nd upload" />
+     <MESSAGE value="3rd upload" />
+-    <MESSAGE value="tests for player impl" />
+     <MESSAGE value="fight" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fight" />
++    <MESSAGE value="tests for player impl" />
++    <MESSAGE value="4th upload" />
++    <option name="LAST_COMMIT_MESSAGE" value="4th upload" />
+   </component>
+ </project>
+\ No newline at end of file

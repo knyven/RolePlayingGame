@@ -9,7 +9,7 @@ public interface Armor {
     int getDefenceStrength();
 
     // getter for getting armor type
-    gearType getArmorType();
+    ArmorType getArmorType();
 
     // main function to combine armor in either hand or foot armor into combo armor
     Armor combineArmor(Armor armor);

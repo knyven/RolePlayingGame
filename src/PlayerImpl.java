@@ -1,14 +1,13 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerImpl implements Player{
 
     private String name;
-    private int attackStrength;
-    private int defenceStrength;
+    private final int attackStrength;
+    private final int defenceStrength;
     private Armor headArmor;
-    private ArrayList<Armor> handArmor;
-    private ArrayList<Armor> footArmor;
+    private final ArrayList<Armor> handArmor;
+    private final ArrayList<Armor> footArmor;
 
 
     // initialize player to have a name and no gear and no attack or defence strength
@@ -73,7 +72,7 @@ public class PlayerImpl implements Player{
             throw new IllegalArgumentException("Armor cannot be null");
         }
         // if armor is headgear check is player has headgear
-        if (armor.getArmorType() == gearType.headGear)
+        if (armor.getArmorType() == ArmorType.headARMOR)
         {
             // if player has headgear combine the pieces
             if(hasHeadArmor())
@@ -86,7 +85,7 @@ public class PlayerImpl implements Player{
                 this.headArmor = armor;
             }
         }
-        else if (armor.getArmorType() == gearType.handGear)
+        else if (armor.getArmorType() == ArmorType.handARMOR)
         {
             if(isHandFull())
             {
@@ -98,7 +97,7 @@ public class PlayerImpl implements Player{
                this.handArmor.add(armor);
             }
         }
-        else if (armor.getArmorType() == gearType.footGear)
+        else if (armor.getArmorType() == ArmorType.footARMOR)
         {
            if(isFootFull())
            {

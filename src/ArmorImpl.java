@@ -1,10 +1,10 @@
-public abstract class ArmorImpl implements Armor {
+abstract class ArmorImpl implements Armor {
     protected String armorName;
     protected String armorAdj;
     protected String armorComboName;
     protected int attackStrength;
     protected int defenceStrength;
-    protected gearType armorType;
+    protected ArmorType armorType;
 
 
     @Override
@@ -30,7 +30,7 @@ public abstract class ArmorImpl implements Armor {
         return combineArmorParts(newName, newAdj, newAttack, newDefence, this.armorType);
 
     }
-    abstract protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, gearType armorType);
+    abstract protected Armor combineArmorParts(String newName, String newAdj, int newAttack, int newDefence, ArmorType armorType);
 
     @Override
     public String getArmorName() {
@@ -58,7 +58,7 @@ public abstract class ArmorImpl implements Armor {
     }
 
     @Override
-    public gearType getArmorType() {
+    public ArmorType getArmorType() {
         return this.armorType;
     }
 

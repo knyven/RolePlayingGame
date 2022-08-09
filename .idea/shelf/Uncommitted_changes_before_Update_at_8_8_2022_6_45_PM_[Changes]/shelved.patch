@@ -1,0 +1,138 @@
+Index: test/PlayerImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import static org.junit.Assert.*;\r\n\r\npublic class PlayerImplTest {\r\n\r\n    PlayerImpl player1 = new PlayerImpl(\"Player1\", 10, 10);\r\n    PlayerImpl player2 = new PlayerImpl(\"Player2\", 10, 10);\r\n\r\n    HeadArmor headArmor1 = new HeadArmor(\"HeadArmor\", \"HeadArmorAdj\", 10, 10, gearType.headGear);\r\n    HeadArmor headArmor2 = new HeadArmor(\"HeadArmor2\", \"HeadArmorAdj2\", 10, 10, gearType.headGear);\r\n\r\n    HandArmor handArmor1 = new HandArmor(\"HandArmor1\", \"HandArmorAdj1\", 10, 10, gearType.handGear);\r\n    HandArmor handArmor2 = new HandArmor(\"HandArmor2\", \"HandArmorAdj2\", 10, 10, gearType.handGear);\r\n    HandArmor handArmor3 = new HandArmor(\"HandArmor3\", \"HandArmorAdj3\", 10, 10, gearType.handGear);\r\n    HandArmor handArmor4 = new HandArmor(\"HandArmor4\", \"HandArmorAdj4\", 10, 10, gearType.handGear);\r\n\r\n    FootArmor footArmor1 = new FootArmor(\"Sneakers\", \"Lightening\", 10, 10, gearType.footGear);\r\n    FootArmor footArmor2 = new FootArmor(\"Hoverboard\", \"Happy\", 10, 10, gearType.footGear);\r\n    FootArmor footArmor3 = new FootArmor(\"Sandals\", \"Scurrying\", 10, 10, gearType.footGear);\r\n    FootArmor footArmor4 = new FootArmor(\"FootArmor4\", \"FootArmorAdj4\", 10, 10, gearType.footGear);\r\n\r\n    @org.junit.Test\r\n    public void getName() {\r\n        assertEquals(\"Player1\", player1.getName());\r\n        assertEquals(\"Player2\", player2.getName());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void getAttackStrength() {\r\n        assertEquals(10, player1.getAttackStrength());\r\n        assertEquals(10, player2.getAttackStrength());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void getDefenceStrength() {\r\n        assertEquals(10, player1.getDefenceStrength());\r\n        assertEquals(10, player2.getDefenceStrength());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void addArmor() {\r\n        player1.addArmor(headArmor1);\r\n        player1.addArmor(handArmor1);\r\n        player1.addArmor(handArmor2);\r\n        player1.addArmor(footArmor1);\r\n        player1.addArmor(footArmor2);\r\n\r\n        player2.addArmor(headArmor2);\r\n        player2.addArmor(handArmor3);\r\n        player2.addArmor(handArmor4);\r\n        player2.addArmor(footArmor3);\r\n        player2.addArmor(footArmor4);\r\n\r\n        assertEquals(60, player1.getAttackStrength());\r\n        assertEquals(60, player1.getDefenceStrength());\r\n        System.out.println(player1.toString());\r\n    }\r\n\r\n    @org.junit.Test\r\n    public void combiningArmor(){\r\n\r\n        player1.addArmor(footArmor1);\r\n        player1.addArmor(footArmor2);\r\n        player1.addArmor(footArmor3);\r\n        assertEquals(\r\n        \"\"\" \r\n        Player: Player1\r\n        Attack Strength: 40\r\n        Defence Strength: 40\r\n        No head armor present!\r\n        Foot Armor: Lightening Sneakers\r\n        Foot Armor: Happy, Scurrying Hoverboard\r\n        \"\"\" , player1.toString());\r\n    }\r\n\r\n\r\n    @org.junit.Test (expected = IllegalArgumentException.class)\r\n    public void combiningArmorException() {\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/PlayerImplTest.java b/test/PlayerImplTest.java
+--- a/test/PlayerImplTest.java	(revision f61d860e487495d0d083203483a609be645fc14d)
++++ b/test/PlayerImplTest.java	(date 1659997671953)
+@@ -36,6 +36,19 @@
+         assertEquals(10, player2.getDefenceStrength());
+     }
+ 
++    @org.junit.Test
++    public void getAttackStrengthException()
++    {
++        assertEquals(10, player1.getAttackStrength());
++        assertEquals(10, player2.getAttackStrength());
++    }
++
++    @org.junit.Test
++    public void getDefenceStrengthException() {
++        assertEquals(10, player1.getDefenceStrength());
++        assertEquals(10, player2.getDefenceStrength());
++    }
++
+     @org.junit.Test
+     public void addArmor() {
+         player1.addArmor(headArmor1);
+Index: test/FightImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/FightImplTest.java b/test/FightImplTest.java
+new file mode 100644
+--- /dev/null	(date 1659997671958)
++++ b/test/FightImplTest.java	(date 1659997671958)
+@@ -0,0 +1,73 @@
++import org.junit.Test;
++
++import java.util.ArrayList;
++
++import static org.junit.Assert.*;
++
++public class FightImplTest {
++
++    @Test
++    public void fightTest() {
++
++        Player player1 = new PlayerImpl("Player1", 10, 10);
++        Player player2 = new PlayerImpl("Player2", 10, 10);
++        ArrayList<Armor> armorList = new ArrayList<>();
++        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, gearType.footGear));
++        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, gearType.footGear));
++        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, gearType.footGear));
++        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, gearType.footGear));
++        armorList.add(new HandArmor("Sword", "Justice", 40, 10, gearType.handGear));
++        armorList.add(new HandArmor("Shield", "Protection", 0, 75, gearType.handGear));
++        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, gearType.handGear));
++        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, gearType.headGear));
++
++        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, gearType.headGear));
++        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
++        FightImpl fight1 = new FightImpl(player1, player2, armorList);
++        fight1.fight();
++    }
++
++
++    @Test
++    public void fightTest2() {
++
++        Player player1 = new PlayerImpl("Player1", 10, 10);
++        Player player2 = new PlayerImpl("Player2", 10, 10);
++        ArrayList<Armor> armorList = new ArrayList<>();
++        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, gearType.footGear));
++        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, gearType.footGear));
++        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, gearType.footGear));
++        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, gearType.footGear));
++        armorList.add(new HandArmor("Sword", "Justice", 40, 10, gearType.handGear));
++        armorList.add(new HandArmor("Shield", "Protection", 0, 75, gearType.handGear));
++        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, gearType.handGear));
++        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, gearType.headGear));
++
++        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, gearType.headGear));
++        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
++        FightImpl fight1 = new FightImpl(player1, player2, armorList);
++        fight1.fight();
++    }
++
++
++    @Test
++    public void fightTest3() {
++
++        Player player1 = new PlayerImpl("Player1", 10, 10);
++        Player player2 = new PlayerImpl("Player2", 10, 10);
++        ArrayList<Armor> armorList = new ArrayList<>();
++        armorList.add(new FootArmor("Sneakers", "Lightening", 10, 5, gearType.footGear));
++        armorList.add(new FootArmor("Hoverboard", "Scurrying",35, 2, gearType.footGear));
++        armorList.add(new FootArmor("Sandals", "Sharp", 30, 10, gearType.footGear));
++        armorList.add(new FootArmor("Boots", "Fearful", 40, 0, gearType.footGear));
++        armorList.add(new HandArmor("Sword", "Justice", 40, 10, gearType.handGear));
++        armorList.add(new HandArmor("Shield", "Protection", 0, 75, gearType.handGear));
++        armorList.add(new HandArmor("Gloves", "Righteousness", 0, 50, gearType.handGear));
++        armorList.add(new HandArmor("Blade", "Hateful", 55, 0, gearType.headGear));
++
++        armorList.add(new HeadArmor("Helmet", "Flurrying", 0, 50, gearType.headGear));
++        armorList.add(new HeadArmor("Hat", "Protection", 0, 50, gearType.headGear));
++        FightImpl fight1 = new FightImpl(player1, player2, armorList);
++        fight1.fight();
++    }
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"bdcd10b3-9c70-4a64-a87a-e71b1502cebf\" name=\"Changes\" comment=\"fight\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_8_2022_4_03_PM__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_8_2022_4_03_PM__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/FightImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/FightImpl.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"JUnit4 Test Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2D2WMtYcSNLS6EAaSbqVmMEQseC\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/vknya/OneDrive/Documents/School/Northeastern/CS 5004/RolePlayingGame&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.PlayerImplTest.combiningArmor\">\r\n    <configuration name=\"PlayerImplTest.addArmor\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"RolePlayingGame\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"PlayerImplTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"addArmor\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PlayerImplTest.combiningArmor\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"RolePlayingGame\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"PlayerImplTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"combiningArmor\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PlayerImplTest.getName\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"RolePlayingGame\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"PlayerImplTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"getName\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.PlayerImplTest.combiningArmor\" />\r\n        <item itemvalue=\"JUnit.PlayerImplTest.addArmor\" />\r\n        <item itemvalue=\"JUnit.PlayerImplTest.getName\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"bdcd10b3-9c70-4a64-a87a-e71b1502cebf\" name=\"Changes\" comment=\"\" />\r\n      <created>1659897615790</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1659897615790</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"1st upload\">\r\n      <created>1659898152476</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659898152476</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"1st upload\">\r\n      <created>1659898207310</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659898207310</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"1st upload\">\r\n      <created>1659898392847</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659898392847</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"2nd upload\">\r\n      <created>1659899020429</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659899020429</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"3rd upload\">\r\n      <created>1659900633989</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659900633989</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"3rd upload\">\r\n      <created>1659900779222</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659900779222</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"3rd upload\">\r\n      <created>1659901083500</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659901083500</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"3rd upload\">\r\n      <created>1659901570366</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659901570366</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"3rd upload\">\r\n      <created>1659907654491</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659907654491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"fight\">\r\n      <created>1659926769962</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659926769962</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"fight\">\r\n      <created>1659926829208</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659926829208</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"tests for player impl\">\r\n      <created>1659980608288</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1659980608289</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"13\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"1st upload\" />\r\n    <MESSAGE value=\"2nd upload\" />\r\n    <MESSAGE value=\"3rd upload\" />\r\n    <MESSAGE value=\"fight\" />\r\n    <MESSAGE value=\"tests for player impl\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"tests for player impl\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f61d860e487495d0d083203483a609be645fc14d)
++++ b/.idea/workspace.xml	(date 1659998722176)
+@@ -4,10 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="fight">
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_8_2022_4_03_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_8_2022_4_03_PM__Changes_.xml" afterDir="false" />
++    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="tests for player impl">
++      <change afterPath="$PROJECT_DIR$/test/FightImplTest.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/FightImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FightImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test/PlayerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PlayerImplTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
