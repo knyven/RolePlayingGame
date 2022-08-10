@@ -1,5 +1,18 @@
+/**
+ * Class representing the Foot armor for the Role Playing game
+ */
+
+
 public class HeadArmor extends ArmorImpl {
 
+    /**
+     * Constructor for a piece of HeadArmor.
+     *
+     * @param armorName  the primary name of the armor piece
+     * @param armorAdj the adjective part of the name of the armor piece
+     * @param attackStrength   the attack stat of the armor piece
+     * @param defenceStrength the defense stat of the armor piece
+     */
     public HeadArmor(String armorName, String armorAdj, int attackStrength, int defenceStrength) {
         this.armorName = armorName;
         this.armorAdj = armorAdj;

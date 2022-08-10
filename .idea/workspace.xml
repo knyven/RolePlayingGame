@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="comments">
-      <change beforePath="$PROJECT_DIR$/src/ArmorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FootArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FootArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HandArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HandArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HeadArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HeadArmor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +68,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FightImplTest.fightTest">
+  <component name="RunManager" selected="JUnit.PlayerImplTest">
     <configuration name="FightImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RolePlayingGame" />
       <option name="PACKAGE_NAME" value="" />
@@ -105,23 +108,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerImplTest.addArmor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RolePlayingGame" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
-      <option name="METHOD_NAME" value="addArmor" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FightImplTest.fightTest" />
+        <item itemvalue="JUnit.PlayerImplTest" />
         <item itemvalue="JUnit.FightImplTest" />
+        <item itemvalue="JUnit.FightImplTest.fightTest" />
         <item itemvalue="JUnit.FightImplTest.fightTest3" />
         <item itemvalue="JUnit.FightImplTest.fightTest2" />
-        <item itemvalue="JUnit.PlayerImplTest.addArmor" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660083066619</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="comments">
+      <created>1660083256112</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660083256112</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
