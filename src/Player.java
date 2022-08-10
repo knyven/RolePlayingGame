@@ -4,7 +4,5 @@ public interface Player {
     int getDefenceStrength(); //starting defense strength of player
 
     void addArmor(Armor armor); //adding armor pieces stats to player each time a piece is added
-
-
     int getArmorSize();
 }

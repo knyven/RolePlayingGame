@@ -2,16 +2,16 @@ import static org.junit.Assert.*;
 
 public class PlayerImplTest {
 
-    PlayerImpl player1 = new PlayerImpl("Player1", 10, 10);
-    PlayerImpl player2 = new PlayerImpl("Player2", 10, 10);
+    PlayerImpl player1 = new PlayerImpl("Venya", 10, 10);
+    PlayerImpl player2 = new PlayerImpl("Sahil", 10, 10);
 
-    HeadArmor headArmor1 = new HeadArmor("HeadArmor", "HeadArmorAdj", 10, 10);
+    HeadArmor headArmor1 = new HeadArmor("Hat", "Sly", 10, 10);
     HeadArmor headArmor2 = new HeadArmor("HeadArmor2", "HeadArmorAdj2", 10, 10);
 
-    HandArmor handArmor1 = new HandArmor("HandArmor1", "HandArmorAdj1", 10, 10);
-    HandArmor handArmor2 = new HandArmor("HandArmor2", "HandArmorAdj2", 10, 10);
-    HandArmor handArmor3 = new HandArmor("HandArmor3", "HandArmorAdj3", 10, 10);
-    HandArmor handArmor4 = new HandArmor("HandArmor4", "HandArmorAdj4", 10, 10);
+    HandArmor handArmor1 = new HandArmor("Sword", "Quick", 10, 10);
+    HandArmor handArmor2 = new HandArmor("Shield", "Furious", 10, 10);
+    HandArmor handArmor3 = new HandArmor("Gloves", "Temptation", 10, 10);
+    HandArmor handArmor4 = new HandArmor("Baton", "Anger", 10, 10);
 
     FootArmor footArmor1 = new FootArmor("Sneakers", "Lightening", 10, 10);
     FootArmor footArmor2 = new FootArmor("Hoverboard", "Happy", 10, 10);
@@ -20,8 +20,8 @@ public class PlayerImplTest {
 
     @org.junit.Test
     public void getName() {
-        assertEquals("Player1", player1.getName());
-        assertEquals("Player2", player2.getName());
+        assertEquals("Venya", player1.getName());
+        assertEquals("Sahil", player2.getName());
     }
 
     @org.junit.Test
@@ -36,18 +36,7 @@ public class PlayerImplTest {
         assertEquals(10, player2.getDefenceStrength());
     }
 
-    @org.junit.Test
-    public void getAttackStrengthException()
-    {
-        assertEquals(10, player1.getAttackStrength());
-        assertEquals(10, player2.getAttackStrength());
-    }
 
-    @org.junit.Test
-    public void getDefenceStrengthException() {
-        assertEquals(10, player1.getDefenceStrength());
-        assertEquals(10, player2.getDefenceStrength());
-    }
 
     @org.junit.Test
     public void addArmor() {
@@ -66,6 +55,7 @@ public class PlayerImplTest {
         assertEquals(60, player1.getAttackStrength());
         assertEquals(60, player1.getDefenceStrength());
         System.out.println(player1.toString());
+
     }
 
     @org.junit.Test

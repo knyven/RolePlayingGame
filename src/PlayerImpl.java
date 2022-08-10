@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+/**
+ * Class representing the players in the game.
+ */
 public class PlayerImpl implements Player{
 
     private String name;
