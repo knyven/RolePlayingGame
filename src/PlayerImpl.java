@@ -12,7 +12,7 @@ public class PlayerImpl implements Player{
     private final ArrayList<Armor> footArmor;
 
     private static final int MAX_HAND_ARMOR = 2;
-    private static final int MAX_FOOT_ARMOR = 1;
+    private static final int MAX_FOOT_ARMOR = 2;
 
 
     // initialize player to have a name and no gear and no attack or defence strength
