@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="final upload">
-      <change afterPath="$PROJECT_DIR$/res/RolePlayingGameUml.drawio.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/Testing for role _ (1).docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +56,9 @@
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vknya\OneDrive\Documents\School\Northeastern\CS 5004\RolePlayingGame\res" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
@@ -242,7 +245,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660173049317</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="final upload">
+      <created>1660173153580</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1660173153580</updated>
+    </task>
+    <task id="LOCAL-00018" summary="final upload">
+      <created>1660173183518</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1660173183518</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
