@@ -18,10 +18,6 @@ abstract class ArmorImpl implements Armor {
         if (armor == null) {
             throw new IllegalArgumentException("Armor cannot be null");
         }
-        // instance of armor class should be the same
-        if (!(armor instanceof ArmorImpl)) {
-            throw new IllegalArgumentException("Armor must be of type ArmorImpl");
-        }
         // if armor passed in is of different type raise exception
         if (armor.getArmorType() != this.armorType) {
             throw new IllegalArgumentException("Armor cannot be of different type");

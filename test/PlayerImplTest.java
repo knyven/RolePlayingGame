@@ -54,19 +54,18 @@ public class PlayerImplTest {
 
         assertEquals(60, player1.getAttackStrength());
         assertEquals(60, player1.getDefenceStrength());
-        System.out.println(player1.toString());
 
     }
 
     @org.junit.Test
-    public void combiningArmor(){
+    public void combiningFootArmor(){
 
         player1.addArmor(footArmor1);
         player1.addArmor(footArmor2);
         player1.addArmor(footArmor3);
         assertEquals(
         """ 
-        Player: Player1
+        Player: Venya
         Attack Strength: 40
         Defence Strength: 40
         No head armor present!
@@ -74,11 +73,42 @@ public class PlayerImplTest {
         Foot Armor: Happy, Scurrying Hoverboard
         """ , player1.toString());
     }
+    @org.junit.Test
+    public void combiningHandArmor(){
+
+        player1.addArmor(handArmor1);
+        player1.addArmor(handArmor2);
+        player1.addArmor(handArmor3);
+        assertEquals(
+                """ 
+                Player: Venya
+                Attack Strength: 40
+                Defence Strength: 40
+                No head armor present!
+                Hand Armor: Quick Sword
+                Hand Armor: Furious, Temptation Shield
+                """ , player1.toString());
+    }
+
+    @org.junit.Test
+    public void combiningHeadArmor(){
+
+        player1.addArmor(headArmor1);
+        player1.addArmor(headArmor2);
+        assertEquals(
+                """ 
+                Player: Venya
+                Attack Strength: 30
+                Defence Strength: 30
+                Head armor: Sly, HeadArmorAdj2 Hat
+                """ , player1.toString());
+    }
 
 
-    @org.junit.Test (expected = IllegalArgumentException.class)
-    public void combiningArmorException() {
+    @org.junit.Test(expected = IllegalArgumentException.class)
+    public void combiningHeadArmorInvalid(){
 
+        player1.addArmor(null);
 
     }
 

@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="comments">
+    <list default="true" id="bdcd10b3-9c70-4a64-a87a-e71b1502cebf" name="Changes" comment="4th upload">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArmorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArmorImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/PlayerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PlayerImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,9 +23,6 @@
         <option value="JUnit4 Test Class" />
       </list>
     </option>
-  </component>
-  <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/RolePlayingGame" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -67,52 +63,51 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PlayerImplTest.addArmor">
-    <configuration name="PlayerImplTest.addArmor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.PlayerImplTest">
+    <configuration name="PlayerImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RolePlayingGame" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
-      <option name="METHOD_NAME" value="addArmor" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerImplTest.combiningFootArmor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RolePlayingGame" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
+      <option name="METHOD_NAME" value="combiningFootArmor" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerImplTest.getAttackStrength" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerImplTest.combiningHandArmor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RolePlayingGame" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
-      <option name="METHOD_NAME" value="getAttackStrength" />
+      <option name="METHOD_NAME" value="combiningHandArmor" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerImplTest.getAttackStrengthException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerImplTest.combiningHeadArmor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RolePlayingGame" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
-      <option name="METHOD_NAME" value="getAttackStrengthException" />
+      <option name="METHOD_NAME" value="combiningHeadArmor" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerImplTest.getDefenceStrength" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerImplTest.combiningHeadArmorInvalid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RolePlayingGame" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
-      <option name="METHOD_NAME" value="getDefenceStrength" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlayerImplTest.getName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="RolePlayingGame" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PlayerImplTest" />
-      <option name="METHOD_NAME" value="getName" />
+      <option name="METHOD_NAME" value="combiningHeadArmorInvalid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -120,11 +115,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PlayerImplTest.addArmor" />
-        <item itemvalue="JUnit.PlayerImplTest.getDefenceStrength" />
-        <item itemvalue="JUnit.PlayerImplTest.getAttackStrength" />
-        <item itemvalue="JUnit.PlayerImplTest.getName" />
-        <item itemvalue="JUnit.PlayerImplTest.getAttackStrengthException" />
+        <item itemvalue="JUnit.PlayerImplTest" />
+        <item itemvalue="JUnit.PlayerImplTest.combiningHeadArmorInvalid" />
+        <item itemvalue="JUnit.PlayerImplTest.combiningFootArmor" />
+        <item itemvalue="JUnit.PlayerImplTest.combiningHandArmor" />
+        <item itemvalue="JUnit.PlayerImplTest.combiningHeadArmor" />
       </list>
     </recent_temporary>
   </component>
@@ -235,21 +230,7 @@
       <option name="project" value="LOCAL" />
       <updated>1659997921214</updated>
     </task>
-    <task id="LOCAL-00015" summary="comments">
-      <created>1660083066619</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1660083066619</updated>
-    </task>
-    <task id="LOCAL-00016" summary="comments">
-      <created>1660083256112</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1660083256112</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,7 +250,6 @@
     <MESSAGE value="3rd upload" />
     <MESSAGE value="tests for player impl" />
     <MESSAGE value="fight" />
-    <MESSAGE value="comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="fight" />
   </component>
 </project>

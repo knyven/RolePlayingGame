@@ -11,6 +11,9 @@ public class PlayerImpl implements Player{
     private final ArrayList<Armor> handArmor;
     private final ArrayList<Armor> footArmor;
 
+    private static final int MAX_HAND_ARMOR = 2;
+    private static final int MAX_FOOT_ARMOR = 1;
+
 
     // initialize player to have a name and no gear and no attack or defence strength
     public PlayerImpl(String name, int attackStrength, int defenceStrength) {
@@ -118,11 +121,11 @@ public class PlayerImpl implements Player{
     }
 
     public boolean isHandFull() {
-        return this.handArmor.size() == 2;
+        return this.handArmor.size() == MAX_HAND_ARMOR;
     }
 
     public boolean isFootFull() {
-        return this.footArmor.size() == 2;
+        return this.footArmor.size() == MAX_FOOT_ARMOR;
     }
 
     public int getArmorSize(){
